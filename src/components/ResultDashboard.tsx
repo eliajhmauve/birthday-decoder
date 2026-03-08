@@ -1,6 +1,6 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, Share2 } from "lucide-react";
+import { ArrowLeft, Camera, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   getZodiac, getLifePathNumber, getLifePathMeaning, getBirthstone,
