@@ -102,6 +102,36 @@ const ResultDashboard = ({ birthday, onReset }: ResultDashboardProps) => {
         </h1>
       </motion.div>
 
+      {/* Birthday Countdown */}
+      <motion.div {...cardVariant(0.5)} className="mb-8 rounded-xl border border-primary/20 bg-gradient-to-r from-primary/5 via-card/80 to-accent/5 p-6 text-center backdrop-blur-sm">
+        {countdown.isToday ? (
+          <div>
+            <div className="text-4xl mb-2">🎉</div>
+            <p className="font-display text-xl font-bold text-primary">今天是你的生日！</p>
+            <p className="mt-1 text-sm text-muted-foreground">祝你生日快樂！🎂</p>
+          </div>
+        ) : (
+          <div>
+            <p className="text-sm text-muted-foreground mb-2">距離下一次生日還有</p>
+            <div className="flex items-center justify-center gap-1">
+              <span className="font-display text-5xl font-bold gradient-text-golden">{countdown.daysLeft}</span>
+              <span className="text-lg text-muted-foreground ml-1">天</span>
+            </div>
+            <div className="mt-4 flex justify-center gap-6 text-sm">
+              <div>
+                <span className="text-muted-foreground">現在年齡</span>
+                <p className="font-display font-bold text-foreground">{countdown.age} 歲</p>
+              </div>
+              <div className="w-px bg-border" />
+              <div>
+                <span className="text-muted-foreground">已活了</span>
+                <p className="font-display font-bold text-foreground">{countdown.totalDaysAlive.toLocaleString()} 天</p>
+              </div>
+            </div>
+          </div>
+        )}
+      </motion.div>
+
       <div className="space-y-5">
         {/* Basic Info */}
         <motion.div {...cardVariant(1)} className="card-glow rounded-xl bg-card/80 p-6 backdrop-blur-sm">
