@@ -1,7 +1,8 @@
 import { useMemo, useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, Camera, Share2 } from "lucide-react";
+import { ArrowLeft, Camera, Share2, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 import {
   getZodiac, getLifePathNumber, getLifePathMeaning, getBirthstone,
   getBirthdayColor, getLuckyNumbers, getLuckyDay,
@@ -25,6 +26,7 @@ const cardVariant = (i: number) => ({
 });
 
 const ResultDashboard = ({ birthday, onReset }: ResultDashboardProps) => {
+  const navigate = useNavigate();
   const [showShareCard, setShowShareCard] = useState(false);
   const month = birthday.getMonth() + 1;
   const day = birthday.getDate();
@@ -264,6 +266,18 @@ const ResultDashboard = ({ birthday, onReset }: ResultDashboardProps) => {
               分享文字
             </Button>
           </div>
+        </motion.div>
+
+        {/* Compatibility Link */}
+        <motion.div {...cardVariant(9)} className="text-center pt-2">
+          <Button
+            variant="outline"
+            onClick={() => navigate("/compatibility")}
+            className="w-full border-accent/30 py-5 text-base hover:border-accent/60 hover:bg-accent/10 transition-all"
+          >
+            <Heart className="mr-2 h-4 w-4 text-accent" fill="currentColor" />
+            💕 測試生日配對相容性
+          </Button>
         </motion.div>
       </div>
 
