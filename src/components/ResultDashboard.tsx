@@ -36,7 +36,7 @@ const ResultDashboard = ({ birthday, onReset }: ResultDashboardProps) => {
       lifePathNum,
       lifePathMeaning: getLifePathMeaning(lifePathNum),
       birthstone: getBirthstone(month),
-      birthFlower: getBirthFlower(month),
+      birthFlower: getDailyFlower(month, day),
       birthdayColor: getBirthdayColor(month, day),
       luckyNumbers: getLuckyNumbers(lifePathNum, day),
       luckyDay: getLuckyDay(lifePathNum),
