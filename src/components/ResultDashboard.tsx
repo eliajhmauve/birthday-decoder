@@ -1,7 +1,8 @@
 import { useMemo, useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, Camera, Share2 } from "lucide-react";
+import { ArrowLeft, Camera, Share2, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 import {
   getZodiac, getLifePathNumber, getLifePathMeaning, getBirthstone,
   getBirthdayColor, getLuckyNumbers, getLuckyDay,
