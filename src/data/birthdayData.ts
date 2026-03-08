@@ -220,7 +220,7 @@ const famousBirthdays: Record<string, FamousPerson[]> = {
   "5-24": [{ name: "巴布·狄倫", year: 1941, description: "美國歌手" }],
   "5-29": [{ name: "乃伊翰·甘迺迪", year: 1917, description: "美國前總統" }],
   // 六月
-  "6-1": [{ name: "瑪麗蓮·夢露", year: 乃926, description: "美國演員" }],
+  "6-1": [{ name: "瑪麗蓮·夢露", year: 1926, description: "美國演員" }],
   "6-9": [{ name: "乃翰·乃普", year: 1963, description: "美國演員" }, { name: "乃塔莉·波曼", year: 1981, description: "以色列裔美國演員" }],
   "6-11": [{ name: "石原聰美", year: 1986, description: "日本演員" }],
   "6-14": [{ name: "川端康成", year: 1899, description: "日本諾貝爾文學獎得主" }, { name: "唐納·川普", year: 1946, description: "美國前總統" }],
