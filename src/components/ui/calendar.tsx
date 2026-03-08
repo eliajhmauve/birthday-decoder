@@ -8,6 +8,8 @@ import { buttonVariants } from "@/components/ui/button";
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 
 function Calendar({ className, classNames, showOutsideDays = true, ...props }: CalendarProps) {
+  const isDropdown = props.captionLayout === "dropdown-buttons" || props.captionLayout === "dropdown";
+
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
@@ -16,7 +18,7 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }: C
         months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
         month: "space-y-4",
         caption: "flex justify-center pt-1 relative items-center",
-        caption_label: "text-sm font-medium hidden [.rdp:not(.rdp-caption_dropdowns)_&]:block",
+        caption_label: cn("text-sm font-medium", isDropdown && "sr-only"),
         caption_dropdowns: "flex items-center gap-2",
         dropdown_month: "relative inline-flex items-center",
         dropdown_year: "relative inline-flex items-center",
