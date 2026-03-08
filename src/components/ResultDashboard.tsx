@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, Camera, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -50,6 +50,25 @@ const ResultDashboard = ({ birthday, onReset }: ResultDashboardProps) => {
     };
   }, [year, month, day]);
 
+  // Birthday countdown
+  const countdown = useMemo(() => {
+    const now = new Date();
+    const thisYear = now.getFullYear();
+    let nextBirthday = new Date(thisYear, month - 1, day);
+    if (nextBirthday <= now) {
+      nextBirthday = new Date(thisYear + 1, month - 1, day);
+    }
+    const diff = nextBirthday.getTime() - now.getTime();
+    const daysLeft = Math.ceil(diff / (1000 * 60 * 60 * 24));
+    const isToday = daysLeft === 0 || (now.getMonth() + 1 === month && now.getDate() === day);
+    
+    // Age calculation
+    const age = thisYear - year - (now < new Date(thisYear, month - 1, day) ? 1 : 0);
+    const totalDaysAlive = Math.floor((now.getTime() - birthday.getTime()) / (1000 * 60 * 60 * 24));
+    
+    return { daysLeft, isToday, age, totalDaysAlive };
+  }, [month, day, year, birthday]);
+
   const shareText = `🎂 我的生日密碼：${data.zodiac.symbol} ${data.zodiac.name} ｜ 生命靈數 ${data.lifePathNum} ｜ 誕生石：${data.birthstone.name} ｜「${data.personality.slice(0, 30)}...」\n\n你的生日密碼是什麼？快來解鎖！`;
 
   const handleShare = async () => {
@@ -81,6 +100,36 @@ const ResultDashboard = ({ birthday, onReset }: ResultDashboardProps) => {
         <h1 className="font-display mt-2 text-3xl font-bold sm:text-4xl">
           🎂 <span className="gradient-text-golden">你的生日密碼</span>
         </h1>
+      </motion.div>
+
+      {/* Birthday Countdown */}
+      <motion.div {...cardVariant(0.5)} className="mb-8 rounded-xl border border-primary/20 bg-gradient-to-r from-primary/5 via-card/80 to-accent/5 p-6 text-center backdrop-blur-sm">
+        {countdown.isToday ? (
+          <div>
+            <div className="text-4xl mb-2">🎉</div>
+            <p className="font-display text-xl font-bold text-primary">今天是你的生日！</p>
+            <p className="mt-1 text-sm text-muted-foreground">祝你生日快樂！🎂</p>
+          </div>
+        ) : (
+          <div>
+            <p className="text-sm text-muted-foreground mb-2">距離下一次生日還有</p>
+            <div className="flex items-center justify-center gap-1">
+              <span className="font-display text-5xl font-bold gradient-text-golden">{countdown.daysLeft}</span>
+              <span className="text-lg text-muted-foreground ml-1">天</span>
+            </div>
+            <div className="mt-4 flex justify-center gap-6 text-sm">
+              <div>
+                <span className="text-muted-foreground">現在年齡</span>
+                <p className="font-display font-bold text-foreground">{countdown.age} 歲</p>
+              </div>
+              <div className="w-px bg-border" />
+              <div>
+                <span className="text-muted-foreground">已活了</span>
+                <p className="font-display font-bold text-foreground">{countdown.totalDaysAlive.toLocaleString()} 天</p>
+              </div>
+            </div>
+          </div>
+        )}
       </motion.div>
 
       <div className="space-y-5">
