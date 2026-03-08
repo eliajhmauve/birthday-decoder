@@ -4,10 +4,11 @@ import { ArrowLeft, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   getZodiac, getLifePathNumber, getLifePathMeaning, getBirthstone,
-  getBirthFlower, getBirthdayColor, getLuckyNumbers, getLuckyDay,
+  getBirthdayColor, getLuckyNumbers, getLuckyDay,
   getLuckyDirection, getFamousBirthdays, getBirthdayRank,
   getBirthdayPercentage, getPersonalitySummary,
 } from "@/data/birthdayData";
+import { getDailyFlower } from "@/data/dailyFlowers";
 import { format } from "date-fns";
 import { zhTW } from "date-fns/locale";
 import { toast } from "sonner";
@@ -35,7 +36,7 @@ const ResultDashboard = ({ birthday, onReset }: ResultDashboardProps) => {
       lifePathNum,
       lifePathMeaning: getLifePathMeaning(lifePathNum),
       birthstone: getBirthstone(month),
-      birthFlower: getBirthFlower(month),
+      birthFlower: getDailyFlower(month, day),
       birthdayColor: getBirthdayColor(month, day),
       luckyNumbers: getLuckyNumbers(lifePathNum, day),
       luckyDay: getLuckyDay(lifePathNum),
