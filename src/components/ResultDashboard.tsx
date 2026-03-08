@@ -50,6 +50,25 @@ const ResultDashboard = ({ birthday, onReset }: ResultDashboardProps) => {
     };
   }, [year, month, day]);
 
+  // Birthday countdown
+  const countdown = useMemo(() => {
+    const now = new Date();
+    const thisYear = now.getFullYear();
+    let nextBirthday = new Date(thisYear, month - 1, day);
+    if (nextBirthday <= now) {
+      nextBirthday = new Date(thisYear + 1, month - 1, day);
+    }
+    const diff = nextBirthday.getTime() - now.getTime();
+    const daysLeft = Math.ceil(diff / (1000 * 60 * 60 * 24));
+    const isToday = daysLeft === 0 || (now.getMonth() + 1 === month && now.getDate() === day);
+    
+    // Age calculation
+    const age = thisYear - year - (now < new Date(thisYear, month - 1, day) ? 1 : 0);
+    const totalDaysAlive = Math.floor((now.getTime() - birthday.getTime()) / (1000 * 60 * 60 * 24));
+    
+    return { daysLeft, isToday, age, totalDaysAlive };
+  }, [month, day, year, birthday]);
+
   const shareText = `🎂 我的生日密碼：${data.zodiac.symbol} ${data.zodiac.name} ｜ 生命靈數 ${data.lifePathNum} ｜ 誕生石：${data.birthstone.name} ｜「${data.personality.slice(0, 30)}...」\n\n你的生日密碼是什麼？快來解鎖！`;
 
   const handleShare = async () => {
