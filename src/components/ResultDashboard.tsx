@@ -25,6 +25,7 @@ const cardVariant = (i: number) => ({
 });
 
 const ResultDashboard = ({ birthday, onReset }: ResultDashboardProps) => {
+  const [showShareCard, setShowShareCard] = useState(false);
   const month = birthday.getMonth() + 1;
   const day = birthday.getDate();
   const year = birthday.getFullYear();
