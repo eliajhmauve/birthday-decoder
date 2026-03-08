@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, Camera, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
