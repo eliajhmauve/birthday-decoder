@@ -19,7 +19,7 @@ interface ResultDashboardProps {
 
 const cardVariant = (i: number) => ({
   initial: { opacity: 0, y: 30 },
-  animate: { opacity: 1, y: 0, transition: { delay: 0.15 * i, duration: 0.5, ease: "easeOut" } },
+  animate: { opacity: 1, y: 0, transition: { delay: 0.15 * i, duration: 0.5, ease: "easeOut" as const } },
 });
 
 const ResultDashboard = ({ birthday, onReset }: ResultDashboardProps) => {
