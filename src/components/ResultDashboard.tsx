@@ -1,6 +1,6 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, Share2 } from "lucide-react";
+import { ArrowLeft, Camera, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   getZodiac, getLifePathNumber, getLifePathMeaning, getBirthstone,
@@ -12,6 +12,7 @@ import { getDailyFlower } from "@/data/dailyFlowers";
 import { format } from "date-fns";
 import { zhTW } from "date-fns/locale";
 import { toast } from "sonner";
+import ShareCard from "@/components/ShareCard";
 
 interface ResultDashboardProps {
   birthday: Date;
@@ -24,6 +25,7 @@ const cardVariant = (i: number) => ({
 });
 
 const ResultDashboard = ({ birthday, onReset }: ResultDashboardProps) => {
+  const [showShareCard, setShowShareCard] = useState(false);
   const month = birthday.getMonth() + 1;
   const day = birthday.getDate();
   const year = birthday.getFullYear();
@@ -196,15 +198,43 @@ const ResultDashboard = ({ birthday, onReset }: ResultDashboardProps) => {
             我的生日密碼是 {data.zodiac.symbol}{data.zodiac.name} + 靈數{data.lifePathNum}！
           </p>
           <p className="mb-5 text-sm text-muted-foreground">你的呢？</p>
-          <Button
-            onClick={handleShare}
-            className="bg-primary px-8 py-5 text-base font-semibold text-primary-foreground hover:scale-105 hover:shadow-[0_0_30px_hsl(38_90%_55%/0.4)] transition-all"
-          >
-            <Share2 className="mr-2 h-4 w-4" />
-            分享我的生日密碼
-          </Button>
+          <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
+            <Button
+              onClick={() => setShowShareCard(true)}
+              className="bg-primary px-8 py-5 text-base font-semibold text-primary-foreground hover:scale-105 hover:shadow-[0_0_30px_hsl(38_90%_55%/0.4)] transition-all"
+            >
+              <Camera className="mr-2 h-4 w-4" />
+              生成分享圖片
+            </Button>
+            <Button
+              variant="outline"
+              onClick={handleShare}
+              className="border-primary/30 px-6 py-5 text-base hover:border-primary/60 transition-all"
+            >
+              <Share2 className="mr-2 h-4 w-4" />
+              分享文字
+            </Button>
+          </div>
         </motion.div>
       </div>
+
+      {/* Share Card Overlay */}
+      {showShareCard && (
+        <ShareCard
+          birthday={format(birthday, "yyyy 年 M 月 d 日", { locale: zhTW })}
+          zodiacSymbol={data.zodiac.symbol}
+          zodiacName={data.zodiac.name}
+          lifePathNum={data.lifePathNum}
+          birthstoneName={data.birthstone.name}
+          birthstoneEmoji={data.birthstone.emoji}
+          birthFlowerName={data.birthFlower.name}
+          birthFlowerEmoji={data.birthFlower.emoji}
+          birthdayColorName={data.birthdayColor.name}
+          birthdayColorHex={data.birthdayColor.hex}
+          personality={data.personality}
+          onClose={() => setShowShareCard(false)}
+        />
+      )}
     </div>
   );
 };
