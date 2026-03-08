@@ -267,6 +267,18 @@ const ResultDashboard = ({ birthday, onReset }: ResultDashboardProps) => {
             </Button>
           </div>
         </motion.div>
+
+        {/* Compatibility Link */}
+        <motion.div {...cardVariant(9)} className="text-center pt-2">
+          <Button
+            variant="outline"
+            onClick={() => navigate("/compatibility")}
+            className="w-full border-accent/30 py-5 text-base hover:border-accent/60 hover:bg-accent/10 transition-all"
+          >
+            <Heart className="mr-2 h-4 w-4 text-accent" fill="currentColor" />
+            💕 測試生日配對相容性
+          </Button>
+        </motion.div>
       </div>
 
       {/* Share Card Overlay */}
