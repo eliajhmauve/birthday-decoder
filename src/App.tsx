@@ -14,7 +14,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      <BrowserRouter basename="/birthday-decoder">
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/compatibility" element={<Compatibility />} />
